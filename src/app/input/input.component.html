@@ -1,0 +1,51 @@
+<mat-form-field [formGroup]="fromGroup" [appearance]="'outline'">
+  <mat-label>{{ lable }}</mat-label>
+  <ng-container *ngIf="gn?.name" [formGroupName]="gn?.name ? gn.name : null">
+    <input
+      matInput
+      type="text"
+      *ngIf="!(controlKey == 0 || controlKey)"
+      [formControl]="fControl"
+    />
+    <input
+      *ngIf="controlKey == 0 || controlKey"
+      matInput
+      type="text"
+      [formControlName]="controlKey"
+    />
+  </ng-container>
+  <ng-container *ngIf="fAn?.name" [formArrayName]="fAn?.name ? fAn.name : null">
+    <input
+      matInput
+      type="text"
+      *ngIf="!(controlKey == 0 || controlKey)"
+      [formControl]="fControl"
+    />
+    <input
+      *ngIf="controlKey == 0 || controlKey"
+      matInput
+      type="text"
+      [formControlName]="controlKey"
+    />
+  </ng-container>
+  <ng-container *ngIf="!gn?.name && !fAn?.name">
+    <input matInput type="text" *ngIf="!controlKey" [formControl]="fControl" />
+    <input
+      *ngIf="controlKey"
+      matInput
+      type="text"
+      [formControlName]="controlKey"
+    />
+  </ng-container>
+
+  <button
+    mat-button
+    *ngIf="data"
+    matSuffix
+    mat-icon-button
+    aria-label="Clear"
+    (click)="data = ''"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
